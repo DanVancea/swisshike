@@ -1,0 +1,15 @@
+<databaseChangelog>
+
+    <changeSet id="create_table_mountain_hut" author="VDan">
+        <sqlFile path="sql/01_mountain_hut.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create_table_hiker" author="VDan">
+        <sqlFile path="sql/02_hiker.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create_table_hiker" author="VDan">
+        <sqlFile path="sql/02_hiker.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangelog>

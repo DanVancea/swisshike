@@ -1,5 +1,10 @@
 package com.swisssign.swisshike.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +15,7 @@ public class Tour {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name="id")
+    @Column(name="id")
     private long id;
 
     @Column (name="name")
@@ -34,6 +39,9 @@ public class Tour {
     @Column (name="hikers")
     private List<Hiker> hikers;
 
+    public Tour() {
+    }
+
     private Tour(TourBuilder builder) {
         this.id = builder.id;
         this.name = builder.name;
@@ -43,6 +51,8 @@ public class Tour {
         this.hut = builder.hut;
         this.hikers = builder.hikers;
     }
+
+
 
     public static class TourBuilder {
         private long id;
@@ -78,7 +88,7 @@ public class Tour {
             return this;
         }
 
-        public Tourbuilder hut(MountainHut hut) {
+        public TourBuilder hut(MountainHut hut) {
             this.hut = hut;
             return this;
         }
@@ -91,5 +101,6 @@ public class Tour {
         public Tour build() {
             return new Tour(this);
         }
+
     }
 }

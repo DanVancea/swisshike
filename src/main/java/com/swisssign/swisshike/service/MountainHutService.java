@@ -2,6 +2,8 @@ package com.swisssign.swisshike.service;
 
 import com.swisssign.swisshike.model.MountainHut;
 import com.swisssign.swisshike.repository.MountainHutRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

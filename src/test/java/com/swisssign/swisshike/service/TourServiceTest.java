@@ -6,13 +6,23 @@ import com.swisssign.swisshike.model.Tour;
 import com.swisssign.swisshike.repository.HikerRepository;
 import com.swisssign.swisshike.repository.MountainHutRepository;
 import com.swisssign.swisshike.repository.TourRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
-public class TourServiceTest {
+
+class TourServiceTest {
 
     @InjectMocks
     private TourService tourService;
@@ -58,11 +68,11 @@ public class TourServiceTest {
     }
 
     @Test
-    public void testCreateTour() {
+    void testCreateTour() {
         when(mountainHutRepository.findById(anyLong())).thenReturn(Optional.of(mountainHut));
         when(tourRepository.save(any(Tour.class))).thenReturn(tour);
 
-        Tour createdTour = tourService.createTour("Pilatus Tour", "Intermediate", new Date(), new Date(), 1L, Collections.singletonList(1L));
+        Tour createdTour = tourService.createTour("Pilatus Tour", "Intermediate", new Date(), new Date(), 1L);
 
         assertNotNull(createdTour);
         assertEquals("Pilatus Tour", createdTour.getName());
@@ -73,7 +83,7 @@ public class TourServiceTest {
     }
 
     @Test
-    public void testAssignWrongHikerToTour() {
+    void testAssignWrongHikerToTour() {
         when(tourRepository.findById(anyLong())).thenReturn(Optional.of(tour));
         when(hikerRepository.findById(anyLong())).thenReturn(Optional.of(hiker));
 
@@ -85,7 +95,7 @@ public class TourServiceTest {
     }
 
     @Test
-    public void testAssignHikerToTour() {
+    void testAssignHikerToTour() {
 
         hiker = new Hiker.HikerBuilder().id(1L).name("John Doe").experienceLevel("Intermediate").build();
 
@@ -93,7 +103,7 @@ public class TourServiceTest {
         when(hikerRepository.findById(anyLong())).thenReturn(Optional.of(hiker));
         verify(tourRepository, times(1)).save(any(Tour.class));
 
-        tour updatedTour = tourService.assignHikerToTour(1L, 1L);
+        Tour updatedTour = tourService.assignHikerToTour(1L, 1L);
 
         assertNotNull(updatedTour);
         assertTrue(updatedTour.getHikers().contains(hiker));

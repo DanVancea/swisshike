@@ -6,6 +6,8 @@ import com.swisssign.swisshike.model.Tour;
 import com.swisssign.swisshike.repository.HikerRepository;
 import com.swisssign.swisshike.repository.MountainHutRepository;
 import com.swisssign.swisshike.repository.TourRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
@@ -21,7 +23,7 @@ public class TourService {
     @Autowired
     private MountainHutRepository mountainHutRepository;
 
-    public Tour createTour(String name, String difficulty, Date startDate, Date endDate, long hutId, List<Long> hickerId) {
+    public Tour createTour(String name, String difficulty, Date startDate, Date endDate, long hutId) {
         MountainHut hut = mountainHutRepository.findById(hutId).orElseThrow(() -> new IllegalArgumentException("Mountain hut not found"));
 
         Tour tour = new Tour.TourBuilder()
@@ -37,12 +39,12 @@ public class TourService {
 
     public Tour assignHikerToTour(Long tourId, Long hikerId) {
         Tour tour = tourRepository.findById(tourId).orElseThrow(() -> new ResourceNotFoundException("Tour not found"));
-        Hiker Hiker = hikerRepository.findById(hikerId).orElseThrow(() -> new ResourceNotFoundException("Hiker not found"));
+        Hiker hiker = hikerRepository.findById(hikerId).orElseThrow(() -> new ResourceNotFoundException("Hiker not found"));
 
         if(!hiker.getExperienceLevel().equalsIgnoreCase(tour.getDifficulty())) {
             throw new InvalidOperationException(" Hiker experience level does not match tour difficulty");
         }
-            tour.getHikers.add(hiker);
+            tour.getHikers().add(hiker);
             return tourRepository.save(tour);
         }
 

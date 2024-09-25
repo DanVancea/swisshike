@@ -1,5 +1,10 @@
 package com.swisssign.swisshike.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,7 +14,7 @@ public class Hiker {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name="id")
+    @Column(name="id")
     private long id;
 
     @Column (name="name")
@@ -32,6 +37,9 @@ public class Hiker {
         this.age = builder.age;
         this.experienceLevel = builder.experienceLevel;
         this.tours = builder.tours;
+    }
+
+    public Hiker() {
     }
 
     public static class HikerBuilder {

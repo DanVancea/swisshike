@@ -1,5 +1,10 @@
 package com.swisssign.swisshike.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -8,8 +13,8 @@ import java.util.List;
 public class MountainHut {
 
     @Id
-    @GemeratedValut(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
     @Column (name = "name")
@@ -22,6 +27,13 @@ public class MountainHut {
 
     @OneToMany(mapping = "hut")
     private List<Tour> tours;
+
+    public MountainHut(MountainHutBuilder mountainHutBuilder) {
+    }
+
+    public MountainHut() {
+
+    }
 
     public static class MountainHutBuilder {
         private long id;

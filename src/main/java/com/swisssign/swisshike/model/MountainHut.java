@@ -29,6 +29,11 @@ public class MountainHut {
     private List<Tour> tours;
 
     public MountainHut(MountainHutBuilder mountainHutBuilder) {
+       this.id = mountainHutBuilder.id;
+       this.name= mountainHutBuilder.name;
+       this.maxCapacity = mountainHutBuilder.maxCapacity;
+       this.pandemicCapacity = mountainHutBuilder.pandemicCapacity;
+       this.tours = mountainHutBuilder.tours;
     }
 
     public MountainHut() {

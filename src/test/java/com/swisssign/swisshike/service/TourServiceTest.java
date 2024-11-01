@@ -83,6 +83,7 @@ class TourServiceTest {
     }
 
     @Test
+    @ExpectedException(InvalidOperati)
     void testAssignWrongHikerToTour() {
         when(tourRepository.findById(anyLong())).thenReturn(Optional.of(tour));
         when(hikerRepository.findById(anyLong())).thenReturn(Optional.of(hiker));

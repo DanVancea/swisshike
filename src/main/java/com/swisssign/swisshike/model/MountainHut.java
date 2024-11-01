@@ -1,8 +1,7 @@
 package com.swisssign.swisshike.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +9,9 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MountainHut {
 
     @Id
@@ -34,10 +36,6 @@ public class MountainHut {
        this.maxCapacity = mountainHutBuilder.maxCapacity;
        this.pandemicCapacity = mountainHutBuilder.pandemicCapacity;
        this.tours = mountainHutBuilder.tours;
-    }
-
-    public MountainHut() {
-
     }
 
     public static class MountainHutBuilder {

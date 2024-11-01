@@ -1,5 +1,6 @@
 package com.swisssign.swisshike.service;
 
+import com.swisssign.swisshike.exceptions.InvalidOperationException;
 import com.swisssign.swisshike.model.Hiker;
 import com.swisssign.swisshike.model.MountainHut;
 import com.swisssign.swisshike.model.Tour;
@@ -38,8 +39,8 @@ public class TourService {
     }
 
     public Tour assignHikerToTour(Long tourId, Long hikerId) {
-        Tour tour = tourRepository.findById(tourId).orElseThrow(() -> new ResourceNotFoundException("Tour not found"));
-        Hiker hiker = hikerRepository.findById(hikerId).orElseThrow(() -> new ResourceNotFoundException("Hiker not found"));
+        Tour tour = tourRepository.findById(tourId).orElseThrow(() -> new ("Tour not found"));
+        Hiker hiker = hikerRepository.findById(hikerId).orElseThrow(() -> new InvalidOperationException("Hiker not found"));
 
         if(!hiker.getExperienceLevel().equalsIgnoreCase(tour.getDifficulty())) {
             throw new InvalidOperationException(" Hiker experience level does not match tour difficulty");
